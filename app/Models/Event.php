@@ -20,6 +20,11 @@ class Event extends Model
 
     protected $fillable=['title','organizer_id','category_id','date','location','description','status'];
     
+    public function scopeApproved($query)
+    {
+        return $query->where('status', 'approved');
+    }
+    
     protected $casts = [
         'date' => 'datetime', // Automatically cast the date field to a Carbon instance
     ];

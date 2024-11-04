@@ -31,13 +31,13 @@
               <h3 class="widget_title">Quick Link<img src="{{ asset('assets/img/shapes/d-1-1.svg') }}"></h3>
               <div class="menu-all-pages-container">
                 <ul class="menu">
-                  <li><a href="about.html">About Us <span></span></a></li>
-                  <li><a href="about.html">Our Mission <span></span></a></li>
-                  <li><a href="service.html">Our Services <span></span></a></li>
-                  <li><a href="service.html">Our Project <span></span></a></li>
+                  <li><a href="{{ route('user.about') }}">About Us <span></span></a></li>
+                  <li><a href="{{ route('user.about') }}">Our Mission <span></span></a></li>
+                  <li><a href="{{ route('user.service') }}">Our Services <span></span></a></li>
+                  <li><a href="{{route('user.service')}}">Our Project <span></span></a></li>
                   <li><a href="team.html">Our Team <span></span></a></li>
                   <li><a href="blog.html">Blog Post <span></span></a></li>
-                  <li><a href="contact.html">Contact Us <span></span></a></li>
+                  <li><a href="{{ route('user.contact') }}">Contact Us <span></span></a></li>
                 </ul>
               </div>
             </div>

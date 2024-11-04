@@ -3,6 +3,7 @@
 use Pusher\Pusher;
 use App\Events\NotificationSent;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\ProfileController;
@@ -18,7 +19,12 @@ use App\Http\Controllers\Attendee\ForgotPasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
-
+Route::get('/lang/{locale}', function ($locale) {
+    if (in_array($locale, config('app.supported_locales'))) {
+        Session::put('locale', $locale);
+    }
+    return redirect()->back();
+})->name('locale.switch');
 Route::get('/',  [AttendeeController::class, 'index'])->name('user.index');
 
 Route::get('/login', function () {    return view('attendees.login');  })->name('user.login');

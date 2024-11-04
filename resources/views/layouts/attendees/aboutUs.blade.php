@@ -32,7 +32,7 @@
                         </ul>
                     </div>
                     <div class="d-inline-flex">
-                        <a href="about.html" class="vs-btn" tabindex="0">
+                        <a href="{{ route('user.about') }}" class="vs-btn" tabindex="0">
                             More Information
                         </a>
                     </div>

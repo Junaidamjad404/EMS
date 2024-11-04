@@ -33,7 +33,7 @@ class AttendeeController extends Controller
         $this->category = $category;
     }
     public function index(){
-        $events=$this->event->where('status','approved')->get();
+        $events=$this->event->approved()->get();
         $categories=$this->category->all();
         return view('Attendees.index',compact('events','categories'));
     }
@@ -182,7 +182,7 @@ class AttendeeController extends Controller
     }
 
     public function events(){
-        $events=$this->event->where('status','approved')->get();
+        $events=$this->event->approved()->get();
         $categories=$this->category->all();
         $event_organizers=$this->user->where('active_organizer',1)->get();
         return view('Attendees.Events.index',compact('events','categories','event_organizers'));

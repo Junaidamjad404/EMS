@@ -1,8 +1,8 @@
 <style>
-.dropdown-item i {
-    margin-right: 8px;
-    /* Ensures icons appear alongside text */
-}
+    .dropdown-item i {
+        margin-right: 8px;
+        /* Ensures icons appear alongside text */
+    }
 </style>
 <header class="vs-header">
     <!-- Header Top -->
@@ -28,6 +28,25 @@
                             <a href="#"><i class="fab fa-behance"></i></a>
                             <a href="#"><i class="fab fa-youtube"></i></a>
                         </div>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ session('locale') === 'en' ? 'English' : 'اردو' }} <!-- Show active language here -->
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                <li>
+                                    <a class="dropdown-item {{ session('locale') === 'en' ? 'active' : '' }}"
+                                        href="{{ route('locale.switch', 'en') }}">English</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ session('locale') === 'ur' ? 'active' : '' }}"
+                                        href="{{ route('locale.switch', 'ur') }}">اردو</a>
+
+                                </li>
+                            </ul>
+                        </div>
+
+
                         <div class="header-links d-none d-md-flex">
                             @if (Auth::check())
                                 <!-- Dropdown for Logged-in User -->
@@ -39,7 +58,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                         <li>
                                             <a class="dropdown-item text-dark" href="{{ route('user.index') }}">
-                                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                                                <i class="fas fa-tachometer-alt"></i>{{ __('message.Dashboard') }}
                                             </a>
                                         </li>
                                         <li>
@@ -55,7 +74,7 @@
                                         <li>
                                             <a class="dropdown-item text-dark" href="{{ route('attendee.logout') }}"
                                                 onclick="event.preventDefault(); document.getElementById('attendee-logout-form').submit();">
-                                                <i class="fas fa-sign-out-alt"></i> Logout
+                                                <i class="fas fa-sign-out-alt"></i> {{ __('message.Logout') }}
                                             </a>
                                         </li>
                                     </ul>
@@ -96,17 +115,17 @@
                             <nav class="main-menu menu-style3 d-none d-lg-block">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('user.index') }}">Home</a>
+                                        <a href="{{ route('user.index') }}">{{__('message.Home')}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('user.about') }}">About Us</a>
+                                        <a href="{{ route('user.about') }}">{{__('message.About_Us')}} </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('user.service') }}">Service</a>
+                                        <a href="{{ route('user.service') }}">{{__('message.Service')}}</a>
 
                                     </li>
                                     <li>
-                                        <a href="{{ route('user.events') }}">Events</a>
+                                        <a href="{{ route('user.events') }}">{{__('message.Events')}}</a>
 
                                     </li>
                                     {{-- <li class="menu-item-has-children mega-menu-wrap">
@@ -152,7 +171,7 @@
                                         </ul>
                                     </li> --}}
                                     <li>
-                                        <a href="{{ route('user.contact') }}">Contact</a>
+                                        <a href="{{ route('user.contact') }}">{{ __('message.Contact') }}</a>
                                     </li>
                                 </ul>
                             </nav>

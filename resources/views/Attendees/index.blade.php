@@ -19,10 +19,10 @@
                                         vehicula lentum sed sit
                                         amet amet quam vehicula dui amet quam vehicula.</p>
                                     <div class="hero-btns justify-content-center">
-                                        <a href="about.html" class="vs-btn">
+                                        <a href="{{ route('user.about') }}" class="vs-btn">
                                             About Us
                                         </a>
-                                        <a href="about.html" class="vs-btn style3">
+                                        <a href="{{ route('user.about') }}" class="vs-btn style3">
                                             Get Started
                                         </a>
                                     </div>
@@ -45,10 +45,10 @@
                                         vehicula lentum sed sit
                                         amet amet quam vehicula dui amet quam vehicula.</p>
                                     <div class="hero-btns justify-content-center">
-                                        <a href="about.html" class="vs-btn">
+                                        <a href="{{ route('user.about') }}" class="vs-btn">
                                             About Us
                                         </a>
-                                        <a href="about.html" class="vs-btn style3">
+                                        <a href="{{ route('user.about') }}" class="vs-btn style3">
                                             Get Started
                                         </a>
                                     </div>
