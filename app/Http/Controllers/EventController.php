@@ -18,10 +18,14 @@ use App\Http\Requests\event\EventStoreRequest;
 use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\Event\EventUpdateRequest;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 
 class EventController extends Controller implements HasMiddleware
 {
+    use AuthorizesRequests; // Ensure this trait is included
+
     public static function middleware():array{
         return [
             new middleware('permission:create events', only:['create']),
@@ -172,9 +176,9 @@ class EventController extends Controller implements HasMiddleware
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Event $event)
     {
-        $event = $this->event->findOrFail($id); // Find the event or fail with a 404
+        $this->authorize('update',$event);
         $categories = Category::all(); // Fetch all categories for the dropdown
         return view('events.edit', compact('event', 'categories')); // Pass both event and categories
     }
@@ -185,7 +189,6 @@ class EventController extends Controller implements HasMiddleware
     public function update(EventUpdateRequest $request, string $id)
     {
         Log::info($request->all()); // Log all incoming request data
-        $this->authorize('update', $event);
          try {
             $event = $this->event->findOrFail($id); // Find the event or fail with a 404
 
@@ -231,22 +234,23 @@ class EventController extends Controller implements HasMiddleware
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Event $event)
     {
-        $this->authorize('delete', $event);
+        // Log user details
+        $user = auth()->user();
+       
 
-        try {
-            $event = $this->event->findOrFail($id);
+        // Authorize deletion
+        if ($this->authorize('delete', $event)) {
             $event->delete();
-
-            return redirect()->back()->with('success','Event has been successfully deleted');
-        } catch (\Exception $e) {
-            // Log any exceptions for further investigation
-            Log::error('Error creating event: ' . $e->getMessage());
-            
-            return redirect()->back()->withErrors(['error' => 'Failed to create event.']);
+            return redirect()->route('events.index')->with('success', 'Event deleted successfully.');
         }
+
+        // If authorization fails
+        Log::error('Authorization failed for user ' . $user->id . ' on event ' . $event->id);
+        return redirect()->route('events.index')->with('error', 'You are not authorized to delete this event.');
     }
+
     public function deleteImage($eventid, $imageId)
     {
         $event = $this->event->findOrFail($eventid);

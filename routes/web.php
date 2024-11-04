@@ -17,34 +17,7 @@ use App\Http\Controllers\Attendee\ResetPasswordController;
 use App\Http\Controllers\Attendee\ForgotPasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-Route::get('/test-notification', function () {
-    // Prepare the message to send
-    $message = 'Hello, this is a real-time notification!';
-    
-    // Prepare the data to be sent
-    $data = [
-        'message' => $message,
-    ];
 
-    // Pusher options
-    $options = [
-        'cluster' => 'ap2', // Use the correct cluster
-        'useTLS' => true
-    ];
-    
-    // Initialize Pusher
-    $pusher = new Pusher(
-        env('PUSHER_APP_KEY'),
-        env('PUSHER_APP_SECRET'),
-        env('PUSHER_APP_ID'),
-        $options
-    );
-    
-    // Trigger the event on the specified channel
-    $pusher->trigger("user.18", "NotificationSent", $data);
-    
-    return 'Notification sent!';
-});
 
 Route::get('/',  [AttendeeController::class, 'index'])->name('user.index');
 
@@ -103,8 +76,8 @@ Route::middleware('auth')->group(function () {
  
 Route::middleware(['auth','active.organizer'])->group(function () {
     Route::resource('events', EventController::class)->except(['edit', 'destroy']);
-    Route::get('events/{event}/edit', [EventController::class, 'edit'])->middleware('can:update,event');
-    Route::delete('events/{event}', [EventController::class, 'destroy'])->middleware('can:delete,event');
+    Route::get('events/{event}/edit', [EventController::class, 'edit'])->name('events.edit')->middleware('can:update,event');
+    Route::delete('events/{event}', [EventController::class, 'destroy'])->name('events.destroy')->middleware('can:delete,event');
     Route::get('api/ticket-purchases/{eventId}', [TicketController::class, 'getTicketPurchases']);
     Route::post('api/ticket-purchases/{id}/attendance', [TicketController::class, 'updateAttendance']);
 

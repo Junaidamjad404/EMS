@@ -20,7 +20,6 @@ class ResetPasswordController extends Controller
      */
     public function reset(Request $request): RedirectResponse
     {
-                dd($request->all());
 
         $request->validate([
             'email' => ['required', 'email'],

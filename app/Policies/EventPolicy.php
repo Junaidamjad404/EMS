@@ -2,8 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Event;
+use Log;
 use App\Models\User;
+use App\Models\Event;
 use Illuminate\Auth\Access\Response;
 
 class EventPolicy
@@ -13,7 +14,7 @@ class EventPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +30,7 @@ class EventPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -46,6 +47,7 @@ class EventPolicy
      */
     public function delete(User $user, Event $event): bool
     {
+
         return $user->id === $event->organizer_id || $user->is_admin;
 
     }
@@ -55,7 +57,7 @@ class EventPolicy
      */
     public function restore(User $user, Event $event): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -63,6 +65,6 @@ class EventPolicy
      */
     public function forceDelete(User $user, Event $event): bool
     {
-        //
+        return true;
     }
 }
