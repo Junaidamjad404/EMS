@@ -27,7 +27,7 @@ Route::get('/lang/{locale}', function ($locale) {
 })->name('locale.switch');
 Route::get('/',  [AttendeeController::class, 'index'])->name('user.index');
 
-Route::get('/login', function () {    return view('attendees.login');  })->name('user.login');
+Route::get('/login', function () {    return view('Attendees.login');  })->name('user.login');
 Route::get('/register', function () {  return view('attendees.register');})->name('user.register');
 Route::get('/contact', function () {    return view('attendees.contact');  })->name('user.contact');
 
