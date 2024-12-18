@@ -43,7 +43,7 @@ Route::post('/events/filter', [EventController::class, 'filter'])->name('events.
 // Route::post('/notifications/send', [NotificationController::class, 'send']);
 
 Route::middleware('auth')->group(function(){
-    Route::get('/home',  [AttendeeController::class, 'index'])->name('user.index');
+    Route::get('/home',  [AttendeeController::class, 'index'])->name('user.index.home');
     Route::get('/attendee/logout', [AttendeeController::class, 'logout'])->name('attendee.logout');
     Route::get('user/profile', [AttendeeController::class, 'show'])->name('user.profile.show');
     Route::put('user/profile/update', [AttendeeController::class, 'update'])->name('user.profile.update');
