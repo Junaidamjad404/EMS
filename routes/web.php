@@ -28,8 +28,8 @@ Route::get('/lang/{locale}', function ($locale) {
 Route::get('/',  [AttendeeController::class, 'index'])->name('user.index');
 
 Route::get('/login', function () {    return view('Attendees.login');  })->name('user.login');
-Route::get('/register', function () {  return view('attendees.register');})->name('user.register');
-Route::get('/contact', function () {    return view('attendees.contact');  })->name('user.contact');
+Route::get('/register', function () {  return view('Attendees.register');})->name('user.register');
+Route::get('/contact', function () {    return view('Attendees.contact');  })->name('user.contact');
 
 Route::post('/login', [AttendeeController::class, 'login'])->name('user.store.login');
 Route::post('/register', [AttendeeController::class, 'store'])->name('user.store');
