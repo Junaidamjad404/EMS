@@ -186,7 +186,7 @@ class EventController extends Controller implements HasMiddleware
     /**
      * Update the specified resource in storage.
      */
-    public function update(EventUpdateRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
         Log::info($request->all()); // Log all incoming request data
          try {
