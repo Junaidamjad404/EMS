@@ -19,8 +19,8 @@ class NotifyOrganizerOnEventApproved
 
     public function handle(EventApproved $event)
     {
-        Log::info("Event Organizer id: ",$event->event->organizer_id);
-        Log::info("Your event has been approved: ",$event->event->title);
+        Log::info("Event Organizer id: ".$event->event->organizer_id);
+        Log::info("Your event has been approved: ".$event->event->title);
         $message = "Your event has been {$event->event->status}: {$event->event->title}";
 
         $this->notificationService->sendNotification($event->event->organizer_id, $message);

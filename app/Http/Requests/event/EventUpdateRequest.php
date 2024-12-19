@@ -27,7 +27,10 @@ class EventUpdateRequest extends FormRequest
             'description' => 'required|string',
             'date' => 'required|date',
             'location' => 'required|string|max:255',
+            'organizer_id' => 'required|exists:users,id',
             'category_id' => 'required|exists:categories,id',
+            'promotional_images.*' => 'nullable|image|mimes:jpg,jpeg,png,gif', // max size 2MB
+            'promotional_videos.*' => 'nullable|mimes:mp4,avi,mov,wmv',
             
         ];
     }

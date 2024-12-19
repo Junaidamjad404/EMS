@@ -102,7 +102,7 @@ class AdminController extends Controller
         $eventOrganizer = $this->user->findOrFail($id); // Find the organizer
         $events = $this->event->where('organizer_id', $eventOrganizer->id)->get(); // Fetch their events
 
-        return view('admin.event_organizers.events', compact('eventOrganizer', 'events'));
+        return view('Admin.event_organizers.events', compact('eventOrganizer', 'events'));
     }
     public function updateEventStatus(Request $request, Event $event)
     {
